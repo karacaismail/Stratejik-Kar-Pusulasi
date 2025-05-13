@@ -1,13 +1,13 @@
 # Titanlar Stratejik Kâr Pusulası
 
 
-## ProfitLens - E-Ticaret Kârlılık Analiz Platformu
+## Stratejik Kâr Pusulası - E-Ticaret Kârlılık Analiz Platformu
 
-**ProfitLens**, e-ticaret satıcılarının ürün ve operasyon kârlılığını detaylı bir şekilde analiz etmelerini, fiyatlandırma stratejileri geliştirmelerini ve kârlılıklarını optimize etmelerini sağlayan kapsamlı bir hesaplama ve analiz aracıdır.
+**Stratejik Kâr Pusulası**, e-ticaret satıcılarının ürün ve operasyon kârlılığını detaylı bir şekilde analiz etmelerini, fiyatlandırma stratejileri geliştirmelerini ve kârlılıklarını optimize etmelerini sağlayan kapsamlı bir hesaplama ve analiz aracıdır.
 
 ## Projenin Amacı
 
-Bu platformun temel amacı, e-ticaret dünyasındaki satıcıların karşılaştığı karmaşık maliyet yapılarını (ürün maliyeti, KDV, kargo ücretleri, pazar yeri komisyonları, ek giderler vb.) şeffaf bir şekilde yönetmelerine yardımcı olmaktır. ProfitLens, kullanıcıların:
+Bu platformun temel amacı, e-ticaret dünyasındaki satıcıların karşılaştığı karmaşık maliyet yapılarını (ürün maliyeti, KDV, kargo ücretleri, pazar yeri komisyonları, ek giderler vb.) şeffaf bir şekilde yönetmelerine yardımcı olmaktır. Stratejik Kâr Pusulası, kullanıcıların:
 
 * Her bir ürün veya satış senaryosu için net kârı ve kâr marjını doğru bir şekilde hesaplamasını,
 * Farklı kargo firmaları ve pazar yerleri için maliyetleri karşılaştırmasını,
@@ -71,14 +71,14 @@ Bu platformun temel amacı, e-ticaret dünyasındaki satıcıların karşılaşt
 
 ## Diğer Emsallerinden Farkları
 
-* **Derinlemesine Parametrizasyon:** ProfitLens, özellikle kargo ve pazar yeri komisyonları için çok katmanlı ve detaylı parametre girişine olanak tanır. Bu, gerçek dünya senaryolarına daha yakın hesaplamalar yapılmasını sağlar.
+* **Derinlemesine Parametrizasyon:** Stratejik Kâr Pusulası, özellikle kargo ve pazar yeri komisyonları için çok katmanlı ve detaylı parametre girişine olanak tanır. Bu, gerçek dünya senaryolarına daha yakın hesaplamalar yapılmasını sağlar.
 * **Senaryo Kaydetme ve Yönetimi:** Sadece anlık hesaplama yapmakla kalmaz, kullanıcıların kendi kargo anlaşmalarını ve pazar yeri komisyon yapılarını kaydedip yönetmelerine olanak tanır.
 * **Stratejik Kâr Hedefleme:** Sadece mevcut durumu hesaplamakla kalmaz, "belirli bir net kâr elde etmek için satış fiyatı ne olmalı?" gibi proaktif sorulara yanıt arar.
 * **Entegre Tema ve Bileşenler:** Metronic gibi güçlü bir admin teması üzerine kurulu olması, geliştirme sürecini hızlandırırken, son kullanıcıya da tutarlı ve zengin bir deneyim sunar.
 
 ## Kurulum
 
-ProfitLens, istemci taraflı bir uygulama olduğu için kurulumu oldukça basittir:
+Stratejik Kâr Pusulası, istemci taraflı bir uygulama olduğu için kurulumu oldukça basittir:
 
 1.  Proje dosyalarını bir web sunucusunun yayın dizinine kopyalayın.
 2.  Veya `index.html` dosyasını doğrudan modern bir web tarayıcısında (Chrome, Firefox, Edge vb.) açın.
@@ -107,7 +107,7 @@ Herhangi bir sunucu taraflı dil veya veritabanı kurulumu gerektirmez (mevcut y
 
 ## Geliştirme Süreci ve Katkıda Bulunma
 
-ProfitLens, e-ticaret satıcılarının ihtiyaç duyduğu temel kârlılık hesaplamalarını sunmak üzere `app-calc.js` çekirdek mantığıyla geliştirilmeye başlanmıştır. Metronic tema entegrasyonu ile kullanıcı arayüzü zenginleştirilmiş, dinamik kargo ve pazar yeri parametre yönetimi eklenmiştir.
+Stratejik Kâr Pusulası, e-ticaret satıcılarının ihtiyaç duyduğu temel kârlılık hesaplamalarını sunmak üzere `app-calc.js` çekirdek mantığıyla geliştirilmeye başlanmıştır. Metronic tema entegrasyonu ile kullanıcı arayüzü zenginleştirilmiş, dinamik kargo ve pazar yeri parametre yönetimi eklenmiştir.
 
 **Gelecek Planları:**
 
@@ -119,7 +119,7 @@ ProfitLens, e-ticaret satıcılarının ihtiyaç duyduğu temel kârlılık hesa
 
 **Katkıda Bulunmak İçin:**
 
-ProfitLens açık kaynak bir proje olmamakla birlikte (eğer öyleyse bu bölümü güncelleyebilirsiniz), projenin gelişimine fikirlerinizle veya geri bildirimlerinizle katkıda bulunabilirsiniz. Eğer proje açık kaynak ise:
+Stratejik Kâr Pusulası açık kaynak bir proje olmamakla birlikte (eğer öyleyse bu bölümü güncelleyebilirsiniz), projenin gelişimine fikirlerinizle veya geri bildirimlerinizle katkıda bulunabilirsiniz. Eğer proje açık kaynak ise:
 
 1.  Bu repoyu fork edin.
 2.  Yeni bir özellik veya hata düzeltme için bir branch oluşturun (`git checkout -b feature/yeni-mukemmel-ozellik`).
@@ -145,13 +145,13 @@ function displayCargoParameters(cargoData) {
         // ... daha fazla detay ve düzenleme/silme butonları eklenebilir ...
         listElement.appendChild(listItem);
     });
-} ProfitLens - E-Ticaret Kârlılık Analiz Platformu
+} Stratejik Kâr Pusulası - E-Ticaret Kârlılık Analiz Platformu
 
-**ProfitLens**, e-ticaret satıcılarının ürün ve operasyon kârlılığını detaylı bir şekilde analiz etmelerini, fiyatlandırma stratejileri geliştirmelerini ve kârlılıklarını optimize etmelerini sağlayan kapsamlı bir hesaplama ve analiz aracıdır.
+**Stratejik Kâr Pusulası**, e-ticaret satıcılarının ürün ve operasyon kârlılığını detaylı bir şekilde analiz etmelerini, fiyatlandırma stratejileri geliştirmelerini ve kârlılıklarını optimize etmelerini sağlayan kapsamlı bir hesaplama ve analiz aracıdır.
 
 ## Projenin Amacı
 
-Bu platformun temel amacı, e-ticaret dünyasındaki satıcıların karşılaştığı karmaşık maliyet yapılarını (ürün maliyeti, KDV, kargo ücretleri, pazar yeri komisyonları, ek giderler vb.) şeffaf bir şekilde yönetmelerine yardımcı olmaktır. ProfitLens, kullanıcıların:
+Bu platformun temel amacı, e-ticaret dünyasındaki satıcıların karşılaştığı karmaşık maliyet yapılarını (ürün maliyeti, KDV, kargo ücretleri, pazar yeri komisyonları, ek giderler vb.) şeffaf bir şekilde yönetmelerine yardımcı olmaktır. Stratejik Kâr Pusulası, kullanıcıların:
 
 * Her bir ürün veya satış senaryosu için net kârı ve kâr marjını doğru bir şekilde hesaplamasını,
 * Farklı kargo firmaları ve pazar yerleri için maliyetleri karşılaştırmasını,
@@ -215,14 +215,14 @@ Bu platformun temel amacı, e-ticaret dünyasındaki satıcıların karşılaşt
 
 ## Diğer Emsallerinden Farkları
 
-* **Derinlemesine Parametrizasyon:** ProfitLens, özellikle kargo ve pazar yeri komisyonları için çok katmanlı ve detaylı parametre girişine olanak tanır. Bu, gerçek dünya senaryolarına daha yakın hesaplamalar yapılmasını sağlar.
+* **Derinlemesine Parametrizasyon:** Stratejik Kâr Pusulası, özellikle kargo ve pazar yeri komisyonları için çok katmanlı ve detaylı parametre girişine olanak tanır. Bu, gerçek dünya senaryolarına daha yakın hesaplamalar yapılmasını sağlar.
 * **Senaryo Kaydetme ve Yönetimi:** Sadece anlık hesaplama yapmakla kalmaz, kullanıcıların kendi kargo anlaşmalarını ve pazar yeri komisyon yapılarını kaydedip yönetmelerine olanak tanır.
 * **Stratejik Kâr Hedefleme:** Sadece mevcut durumu hesaplamakla kalmaz, "belirli bir net kâr elde etmek için satış fiyatı ne olmalı?" gibi proaktif sorulara yanıt arar.
 * **Entegre Tema ve Bileşenler:** Metronic gibi güçlü bir admin teması üzerine kurulu olması, geliştirme sürecini hızlandırırken, son kullanıcıya da tutarlı ve zengin bir deneyim sunar.
 
 ## Kurulum
 
-ProfitLens, istemci taraflı bir uygulama olduğu için kurulumu oldukça basittir:
+Stratejik Kâr Pusulası, istemci taraflı bir uygulama olduğu için kurulumu oldukça basittir:
 
 1.  Proje dosyalarını bir web sunucusunun yayın dizinine kopyalayın.
 2.  Veya `index.html` dosyasını doğrudan modern bir web tarayıcısında (Chrome, Firefox, Edge vb.) açın.
@@ -251,7 +251,7 @@ Herhangi bir sunucu taraflı dil veya veritabanı kurulumu gerektirmez (mevcut y
 
 ## Geliştirme Süreci ve Katkıda Bulunma
 
-ProfitLens, e-ticaret satıcılarının ihtiyaç duyduğu temel kârlılık hesaplamalarını sunmak üzere `app-calc.js` çekirdek mantığıyla geliştirilmeye başlanmıştır. Metronic tema entegrasyonu ile kullanıcı arayüzü zenginleştirilmiş, dinamik kargo ve pazar yeri parametre yönetimi eklenmiştir.
+Stratejik Kâr Pusulası, e-ticaret satıcılarının ihtiyaç duyduğu temel kârlılık hesaplamalarını sunmak üzere `app-calc.js` çekirdek mantığıyla geliştirilmeye başlanmıştır. Metronic tema entegrasyonu ile kullanıcı arayüzü zenginleştirilmiş, dinamik kargo ve pazar yeri parametre yönetimi eklenmiştir.
 
 **Gelecek Planları:**
 
@@ -263,7 +263,7 @@ ProfitLens, e-ticaret satıcılarının ihtiyaç duyduğu temel kârlılık hesa
 
 **Katkıda Bulunmak İçin:**
 
-ProfitLens açık kaynak bir proje olmamakla birlikte (eğer öyleyse bu bölümü güncelleyebilirsiniz), projenin gelişimine fikirlerinizle veya geri bildirimlerinizle katkıda bulunabilirsiniz. Eğer proje açık kaynak ise:
+Stratejik Kâr Pusulası açık kaynak bir proje olmamakla birlikte (eğer öyleyse bu bölümü güncelleyebilirsiniz), projenin gelişimine fikirlerinizle veya geri bildirimlerinizle katkıda bulunabilirsiniz. Eğer proje açık kaynak ise:
 
 1.  Bu repoyu fork edin.
 2.  Yeni bir özellik veya hata düzeltme için bir branch oluşturun (`git checkout -b feature/yeni-mukemmel-ozellik`).
