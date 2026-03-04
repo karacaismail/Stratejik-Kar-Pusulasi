@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="manifest" href="manifest.json">
+  <title>Reçete / BOM Oluşturucu — E-Ticaret Maliyet Hesaplayıcı</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    };
+  </script>
+
+  <!-- Tabler Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/tokens.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+  <link href="css/pages.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════ A. HEADER ═══════════ -->
+  <header class="app-header">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <nav class="app-nav" aria-label="Ana menü">
+        <a href="index.html" class="app-nav__link" data-page="index">
+          <i class="ti ti-calculator"></i><span>Hesaplayıcı</span>
+        </a>
+        <a href="recete.html" class="app-nav__link app-nav__link--active" data-page="recete">
+          <i class="ti ti-recipe"></i><span>BOM / Reçete</span>
+        </a>
+        <a href="parametreler.html" class="app-nav__link" data-page="parametreler">
+          <i class="ti ti-settings"></i><span>Parametreler</span>
+        </a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="btn-dark-mode" class="icon-btn" aria-label="Karanlık mod">
+          <i class="ti ti-moon text-lg"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+
+    <!-- B. Reçete Adı + Şablon Seçici -->
+    <div class="bom-section">
+      <div class="flex flex-col sm:flex-row gap-3 mb-2">
+        <div class="flex-1">
+          <label for="recete-adi" class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+            <i class="ti ti-file-description mr-1"></i>Reçete Adı
+          </label>
+          <input type="text" id="recete-adi"
+                 class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700
+                        bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                        focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
+                        transition-shadow text-base"
+                 placeholder="Örn: El Yapımı Sabun, Organik Şampuan..."
+                 value="Yeni Reçete">
+        </div>
+        <div class="sm:w-56">
+          <label for="sablon-sec" class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+            <i class="ti ti-template mr-1"></i>Şablon
+          </label>
+          <select id="sablon-sec"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700
+                         bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                         focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
+                         transition-shadow text-sm">
+            <option value="">Şablon seç…</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- C. Hammadde Bölümü -->
+    <section class="bom-section">
+      <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+        <i class="ti ti-leaf mr-1"></i>Hammadde
+      </h2>
+      <div id="hammadde-list">
+        <!-- DynamicList JS tarafından oluşturulur -->
+      </div>
+    </section>
+
+    <!-- D. Ambalajlama Bölümü -->
+    <section class="bom-section">
+      <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+        <i class="ti ti-package mr-1"></i>Ambalajlama
+      </h2>
+      <div id="ambalaj-list">
+        <!-- DynamicList JS tarafından oluşturulur -->
+      </div>
+    </section>
+
+    <!-- E. İşçilik & Üretim Giderleri -->
+    <section class="bom-section">
+      <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+        <i class="ti ti-tools mr-1"></i>İşçilik &amp; Üretim Giderleri
+      </h2>
+      <div id="iscilik-inputs" class="space-y-4">
+        <!-- SpinBox'lar JS tarafından oluşturulur -->
+      </div>
+    </section>
+
+    <!-- F. Özet -->
+    <section class="bom-summary">
+      <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+        <i class="ti ti-calculator mr-1"></i>Birim Maliyet Özeti
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        <div class="flex flex-col items-center">
+          <span class="text-xs text-gray-500 dark:text-gray-400">Hammadde</span>
+          <span id="subtotal-hammadde" class="text-lg font-semibold">₺0,00</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-xs text-gray-500 dark:text-gray-400">Ambalaj</span>
+          <span id="subtotal-ambalaj" class="text-lg font-semibold">₺0,00</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-xs text-gray-500 dark:text-gray-400">İşçilik & Diğer</span>
+          <span id="subtotal-iscilik" class="text-lg font-semibold">₺0,00</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-xs text-gray-500 dark:text-gray-400">KDV Payı</span>
+          <span id="subtotal-kdv" class="text-lg font-semibold">₺0,00</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mb-2">Toplam Birim Maliyet</p>
+      <p id="toplam-maliyet" class="bom-total">₺0,00</p>
+    </section>
+
+    <!-- G. Aksiyon Butonları -->
+    <div class="flex flex-col sm:flex-row gap-3">
+      <button id="btn-kaydet" class="btn btn--primary flex-1">
+        <i class="ti ti-device-floppy mr-2"></i>Kaydet
+      </button>
+      <button id="btn-kullan" class="btn btn--secondary flex-1">
+        <i class="ti ti-calculator mr-2"></i>Hesaplayıcıda Kullan
+      </button>
+    </div>
+
+    <!-- H. Kayıtlı Reçeteler -->
+    <section class="bom-section">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          <i class="ti ti-bookmarks mr-1"></i>Kayıtlı Reçeteler
+        </h2>
+        <div class="flex gap-2">
+          <button id="btn-karsilastir" class="btn btn--secondary btn--sm" disabled>
+            <i class="ti ti-arrows-diff mr-1"></i>Karşılaştır
+          </button>
+          <button id="btn-recete-export" class="btn btn--secondary btn--sm">
+            <i class="ti ti-download mr-1"></i>Dışa Aktar
+          </button>
+          <button id="btn-recete-import" class="btn btn--secondary btn--sm">
+            <i class="ti ti-upload mr-1"></i>İçe Aktar
+          </button>
+        </div>
+      </div>
+      <div id="saved-recipes">
+        <p class="text-sm text-gray-400 text-center py-4">Henüz kayıtlı reçete yok</p>
+      </div>
+    </section>
+
+    <!-- I. Versiyon Geçmişi (modal) -->
+    <div id="version-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+      <div class="bg-white dark:bg-gray-800 rounded-xl max-w-lg w-full mx-4 p-6 max-h-[80vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-lg"><i class="ti ti-history mr-2"></i>Versiyon Geçmişi</h3>
+          <button id="version-close" class="icon-btn"><i class="ti ti-x text-lg"></i></button>
+        </div>
+        <div id="version-list" class="space-y-2"></div>
+      </div>
+    </div>
+
+    <!-- J. Karşılaştırma (modal) -->
+    <div id="compare-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+      <div class="bg-white dark:bg-gray-800 rounded-xl max-w-3xl w-full mx-4 p-6 max-h-[80vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-lg"><i class="ti ti-arrows-diff mr-2"></i>Reçete Karşılaştırma</h3>
+          <button id="compare-close" class="icon-btn"><i class="ti ti-x text-lg"></i></button>
+        </div>
+        <div id="compare-content"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════ CDN BAĞIMLILIKLARI ═══════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/decimal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+
+  <!-- Ana Modül -->
+  <script type="module" src="js/recete-main.js"></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

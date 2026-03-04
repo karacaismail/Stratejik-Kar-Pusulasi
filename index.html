@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="manifest" href="manifest.json">
+  <title>E-Ticaret Maliyet Hesaplayıcı</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    };
+  </script>
+
+  <!-- Tabler Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/tokens.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+  <link href="css/pages.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="app-header">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <nav class="app-nav" aria-label="Ana menü">
+        <a href="index.html" class="app-nav__link app-nav__link--active" data-page="index">
+          <i class="ti ti-calculator"></i><span>Hesaplayıcı</span>
+        </a>
+        <a href="recete.html" class="app-nav__link" data-page="recete">
+          <i class="ti ti-recipe"></i><span>BOM / Reçete</span>
+        </a>
+        <a href="parametreler.html" class="app-nav__link" data-page="parametreler">
+          <i class="ti ti-settings"></i><span>Parametreler</span>
+        </a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="btn-dark-mode" class="icon-btn" aria-label="Karanlık mod">
+          <i class="ti ti-moon text-lg"></i>
+        </button>
+        <button id="btn-share" class="icon-btn" aria-label="Paylaş">
+          <i class="ti ti-share text-lg"></i>
+        </button>
+        <button id="btn-reset" class="icon-btn" aria-label="Sıfırla">
+          <i class="ti ti-refresh text-lg"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN LAYOUT ═══════════ -->
+  <main class="app-layout max-w-7xl mx-auto px-4 py-6">
+
+    <!-- SOL: Form Panel (%60 desktop) -->
+    <section class="form-panel" aria-label="Hesaplama formu">
+
+      <!-- Wizard Container -->
+      <div id="wizard-container">
+        <!-- ProgressSteps JS tarafından oluşturulur -->
+      </div>
+
+      <!-- ── ADIM 1: Ne & Nerede? ── -->
+      <div id="step-1" class="wizard-step">
+        <div id="step-1-content">
+          <!-- Hesaplama Modu Seçici -->
+          <div class="mb-6">
+            <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wide">
+              <i class="ti ti-calculator mr-1"></i>Hesaplama Modu
+            </h3>
+            <div id="mode-selector"></div>
+          </div>
+
+          <!-- Kategori Grid — JS tarafından doldurulur -->
+          <div id="category-section" class="mb-6">
+            <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wide">
+              <i class="ti ti-category mr-1"></i>Ürün Kategorisi
+            </h3>
+          </div>
+
+          <!-- Pazar Yeri — JS tarafından doldurulur -->
+          <div id="marketplace-section" class="mb-6">
+            <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wide">
+              <i class="ti ti-building-store mr-1"></i>Pazar Yeri
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ADIM 2: Fiyat & Miktar ── -->
+      <div id="step-2" class="wizard-step hidden">
+        <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+          <i class="ti ti-currency-lira mr-1"></i>Fiyat & Miktar
+        </h3>
+        <div id="price-inputs-container" class="space-y-4">
+          <!-- SpinBox'lar JS tarafından oluşturulur -->
+        </div>
+
+        <!-- BOM bilgi çubuğu (opsiyonel) -->
+        <div id="bom-info-bar" class="hidden mt-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+          <p class="text-sm text-blue-700 dark:text-blue-300">
+            <i class="ti ti-recipe mr-1"></i>
+            <span id="bom-info-text">Reçeteden: ₺0</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- ── ADIM 3: Maliyet Detayları ── -->
+      <div id="step-3" class="wizard-step hidden">
+        <div class="step-3-layout">
+          <!-- Sol: Maliyet Kalemleri -->
+          <div class="step-3-costs">
+            <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+              <i class="ti ti-list-details mr-1"></i>Maliyet Kalemleri
+            </h3>
+            <div id="cost-items-container">
+              <!-- SpinBox + Badge satırları JS tarafından oluşturulur -->
+            </div>
+          </div>
+
+          <!-- Sağ: Kampanya, Kargo, Desi -->
+          <div class="step-3-side">
+            <div id="campaign-container" class="mb-4"></div>
+            <div id="cargo-container" class="mb-4"></div>
+            <div id="desi-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wizard Navigasyon Butonları -->
+      <div id="wizard-nav" class="flex justify-between mt-6 gap-4">
+        <button id="btn-prev" class="btn btn--secondary hidden">
+          <i class="ti ti-arrow-left mr-1"></i>Geri
+        </button>
+        <button id="btn-next" class="btn btn--primary ml-auto">
+          İleri<i class="ti ti-arrow-right ml-1"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- SAĞ: Sonuç Panel (%40 desktop, sticky) -->
+    <aside class="results-panel" aria-label="Hesaplama sonuçları">
+      <!-- Hero Kart -->
+      <div id="hero-container" class="mb-4">
+        <div class="hero-card hero-card--neutral">
+          <div class="hero-card__main">
+            <div class="hero-card__icon">
+              <i class="ti ti-minus text-3xl"></i>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Net Kar</p>
+              <p class="text-3xl font-bold" data-net-kar>₺0,00</p>
+            </div>
+          </div>
+          <div class="hero-card__metrics">
+            <div class="hero-metric">
+              <i class="ti ti-percentage"></i>
+              <span class="text-xs text-gray-500">Net Marj</span>
+              <span class="font-semibold" data-net-marj>%0,00</span>
+            </div>
+            <div class="hero-metric">
+              <i class="ti ti-receipt-refund"></i>
+              <span class="text-xs text-gray-500">İade Dahil</span>
+              <span class="font-semibold" data-iade-dahil>₺0,00</span>
+            </div>
+            <div class="hero-metric">
+              <i class="ti ti-tag"></i>
+              <span class="text-xs text-gray-500">Efektif</span>
+              <span class="font-semibold" data-efektif>₺0,00</span>
+            </div>
+            <div class="hero-metric">
+              <i class="ti ti-chart-bar"></i>
+              <span class="text-xs text-gray-500">Brüt Kar</span>
+              <span class="font-semibold" data-brut-kar>₺0,00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uyarılar -->
+      <div id="alerts-container" class="mb-4">
+        <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 text-center">
+          <i class="ti ti-info-circle text-gray-400 text-xl"></i>
+          <p class="text-sm text-gray-400 mt-1">Kategori seçip fiyat girin, anında sonuç görün</p>
+        </div>
+      </div>
+
+      <!-- Metrikler -->
+      <div id="metrics-container" class="mb-4"></div>
+
+      <!-- Detaylı Tablo -->
+      <div id="detail-container" class="mb-4"></div>
+
+      <!-- Reçete linki navbar'a taşındı -->
+    </aside>
+  </main>
+
+  <!-- ═══════════ MOBİL SABİT ÇUBUK ═══════════ -->
+  <div id="mobile-summary-bar" class="mobile-bar hidden lg:hidden">
+    <div class="flex items-center justify-between px-4 py-3">
+      <div>
+        <span class="text-xs text-gray-500">Net Kar</span>
+        <span class="text-lg font-bold" data-net-kar>₺0</span>
+      </div>
+      <div>
+        <span class="text-xs text-gray-500">Marj</span>
+        <span class="text-lg font-bold" data-net-marj>%0</span>
+      </div>
+      <button id="btn-report-mobile" class="btn btn--primary btn--sm">
+        <i class="ti ti-report-analytics"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════ CDN BAĞIMLILIKLARI ═══════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/decimal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+
+  <!-- Ana Modül -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="manifest" href="manifest.json">
+  <title>Parametreler — E-Ticaret Maliyet Hesaplayıcı</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    };
+  </script>
+
+  <!-- Tabler Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/tokens.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+  <link href="css/pages.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="app-header">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <nav class="app-nav" aria-label="Ana menü">
+        <a href="index.html" class="app-nav__link" data-page="index">
+          <i class="ti ti-calculator"></i><span>Hesaplayıcı</span>
+        </a>
+        <a href="recete.html" class="app-nav__link" data-page="recete">
+          <i class="ti ti-recipe"></i><span>BOM / Reçete</span>
+        </a>
+        <a href="parametreler.html" class="app-nav__link app-nav__link--active" data-page="parametreler">
+          <i class="ti ti-settings"></i><span>Parametreler</span>
+        </a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="btn-dark-mode" class="icon-btn" aria-label="Karanlık mod">
+          <i class="ti ti-moon text-lg"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="max-w-5xl mx-auto px-4 py-6 space-y-6">
+
+    <!-- Başlık -->
+    <div class="flex items-center gap-3 mb-2">
+      <i class="ti ti-settings text-2xl text-blue-500"></i>
+      <h1 class="text-lg font-bold">Parametreler</h1>
+      <span class="text-xs text-gray-400 ml-auto">Değişiklikler localStorage'a kaydedilir</span>
+    </div>
+
+    <!-- Section 1: Kargo Fiyatları -->
+    <section class="report-section">
+      <h2 class="report-section__title">
+        <i class="ti ti-truck-delivery"></i>Kargo Fiyatları
+      </h2>
+      <div id="kargo-params">
+        <!-- JS tarafından doldurulur -->
+      </div>
+    </section>
+
+    <!-- Section 2: Komisyon Oranları -->
+    <section class="report-section">
+      <h2 class="report-section__title">
+        <i class="ti ti-percentage"></i>Komisyon Oranları (%)
+      </h2>
+      <div id="komisyon-params">
+        <!-- JS tarafından doldurulur -->
+      </div>
+    </section>
+
+    <!-- Section 3: Vergi & Kesinti -->
+    <section class="report-section">
+      <h2 class="report-section__title">
+        <i class="ti ti-receipt-tax"></i>Vergi & Kesinti
+      </h2>
+      <div id="vergi-params">
+        <!-- JS tarafından doldurulur -->
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-3">
+      <button id="btn-kaydet" class="btn btn--primary flex-1">
+        <i class="ti ti-device-floppy mr-2"></i>Kaydet
+      </button>
+      <button id="btn-sifirla" class="btn btn--secondary flex-1">
+        <i class="ti ti-refresh mr-2"></i>Varsayılanlara Dön
+      </button>
+    </div>
+
+    <!-- Yedekleme -->
+    <section class="bom-section mt-6">
+      <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
+        <i class="ti ti-database mr-1"></i>Veri Yedekleme
+      </h2>
+      <p class="text-xs text-gray-400 mb-3">Tüm verileri (parametreler, reçeteler, hesaplamalar) tek bir dosyaya yedekleyin veya geri yükleyin.</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button id="btn-yedekle" class="btn btn--secondary flex-1">
+          <i class="ti ti-download mr-2"></i>Tüm Verileri Yedekle
+        </button>
+        <button id="btn-geri-yukle" class="btn btn--secondary flex-1">
+          <i class="ti ti-upload mr-2"></i>Yedeği Geri Yükle
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ Toast Container ═══════════ -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
+
+  <!-- Ana Modül -->
+  <script type="module" src="js/parametreler-main.js"></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

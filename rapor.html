@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="tr" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="manifest" href="manifest.json">
+  <title>Detaylı Rapor — E-Ticaret Maliyet Hesaplayıcı</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    };
+  </script>
+
+  <!-- Tabler Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/tokens.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+  <link href="css/pages.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════ A. HEADER ═══════════ -->
+  <header class="app-header">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <nav class="app-nav" aria-label="Ana menü">
+        <a href="index.html" class="app-nav__link" data-page="index">
+          <i class="ti ti-calculator"></i><span>Hesaplayıcı</span>
+        </a>
+        <a href="recete.html" class="app-nav__link" data-page="recete">
+          <i class="ti ti-recipe"></i><span>BOM / Reçete</span>
+        </a>
+        <a href="parametreler.html" class="app-nav__link" data-page="parametreler">
+          <i class="ti ti-settings"></i><span>Parametreler</span>
+        </a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="btn-dark-mode" class="icon-btn" aria-label="Karanlık mod">
+          <i class="ti ti-moon text-lg"></i>
+        </button>
+        <button id="btn-import" class="icon-btn" aria-label="İçe Aktar">
+          <i class="ti ti-upload text-lg"></i>
+        </button>
+        <div class="export-dropdown" id="export-dropdown">
+          <button id="btn-export" class="icon-btn" aria-label="Dışa Aktar">
+            <i class="ti ti-download text-lg"></i>
+          </button>
+          <div class="export-dropdown__menu" id="export-menu">
+            <button data-format="xlsx" class="export-dropdown__item">
+              <i class="ti ti-file-spreadsheet"></i>Excel (.xlsx)
+            </button>
+            <button data-format="csv" class="export-dropdown__item">
+              <i class="ti ti-file-text"></i>CSV (.csv)
+            </button>
+            <button data-format="json" class="export-dropdown__item">
+              <i class="ti ti-file-code-2"></i>JSON (.json)
+            </button>
+          </div>
+        </div>
+        <button id="btn-print" class="icon-btn" aria-label="Yazdır">
+          <i class="ti ti-printer text-lg"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+    <!-- Veri yoksa gösterilecek alan -->
+    <div id="no-data" class="hidden report-section text-center py-16">
+      <i class="ti ti-database-off text-5xl text-gray-300 dark:text-gray-600 mb-4 block"></i>
+      <p class="text-lg text-gray-500 dark:text-gray-400 mb-4">Henüz hesaplama yapılmadı</p>
+      <a href="index.html" class="btn btn--primary">
+        <i class="ti ti-calculator mr-2"></i>Hesaplayıcıya Git
+      </a>
+    </div>
+
+    <!-- Rapor içerik kapsayıcısı -->
+    <div id="report-content" class="space-y-6">
+
+      <!-- 1. Temel Göstergeler (KPI kartları, tam genişlik, yan yana) -->
+      <section class="report-section report-section--no-mb">
+        <h2 class="report-section__title">
+          <i class="ti ti-dashboard"></i>Temel Göstergeler
+        </h2>
+        <div id="report-hero" class="report-hero-row">
+          <!-- JS tarafından doldurulur: 6 KPI card, horizontal -->
+        </div>
+      </section>
+
+      <!-- 2. Detaylı Finansal Tablo (sol) + Performans Metrikleri & Uyarılar (sağ) -->
+      <div class="report-row-2col">
+        <section class="report-section report-section--no-mb">
+          <h2 class="report-section__title">
+            <i class="ti ti-table"></i>Detaylı Finansal Tablo
+          </h2>
+          <div id="report-detail-table">
+            <!-- JS tarafından doldurulur -->
+          </div>
+        </section>
+
+        <div class="report-right-stack">
+          <section class="report-section report-section--no-mb">
+            <h2 class="report-section__title">
+              <i class="ti ti-gauge"></i>Performans Metrikleri
+            </h2>
+            <div id="report-metrics" class="analysis-grid--compact">
+              <!-- JS tarafından doldurulur -->
+            </div>
+          </section>
+
+          <section class="report-section report-section--no-mb">
+            <h2 class="report-section__title">
+              <i class="ti ti-alert-circle"></i>Uyarılar ve Öneriler
+            </h2>
+            <div id="report-alerts" class="space-y-3">
+              <!-- JS tarafından doldurulur -->
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 3. Başabaş Analizi (full-width) -->
+      <section class="report-section">
+        <h2 class="report-section__title">
+          <i class="ti ti-arrow-bounce"></i>Başabaş Analizi
+        </h2>
+        <div id="breakeven-chart" class="chart-container" style="height:360px"></div>
+      </section>
+
+      <!-- 4. Maliyet Kırılımı (sol) + Maliyet Dağılımı (sağ) -->
+      <div class="report-top-grid">
+        <section class="report-section report-section--no-mb report-section--flex">
+          <h2 class="report-section__title">
+            <i class="ti ti-chart-bar"></i>Maliyet Kırılımı
+          </h2>
+          <div id="cost-breakdown-chart" class="chart-container chart-container--grow"></div>
+        </section>
+        <section class="report-section report-section--no-mb report-section--flex">
+          <h2 class="report-section__title">
+            <i class="ti ti-chart-pie"></i>Maliyet Dağılımı
+          </h2>
+          <div id="cost-pie-chart" class="chart-container chart-container--grow"></div>
+        </section>
+      </div>
+
+      <!-- 5. Pazar Karşılaştırması + Hassasiyet Analizi (yan yana) -->
+      <div class="report-row-2col">
+        <section class="report-section report-section--no-mb">
+          <h2 class="report-section__title">
+            <i class="ti ti-building-store"></i>Pazar Yeri Net Kar Karşılaştırması
+          </h2>
+          <div id="comparison-chart" class="chart-container" style="height:360px"></div>
+        </section>
+
+        <section class="report-section report-section--no-mb">
+          <h2 class="report-section__title">
+            <i class="ti ti-adjustments-horizontal"></i>Hassasiyet Tornado — ±%10 Net Kar Etkisi
+          </h2>
+          <div id="sensitivity-chart" class="chart-container" style="height:360px"></div>
+        </section>
+      </div>
+
+    </div><!-- /report-content -->
+  </main>
+
+  <!-- ═══════════ CDN BAĞIMLILIKLARI ═══════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/decimal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+
+  <!-- SheetJS (Excel export) -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+  <!-- Ana Modül -->
+  <script type="module" src="js/rapor-main.js"></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
